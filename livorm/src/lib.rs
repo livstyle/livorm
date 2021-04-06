@@ -1,3 +1,30 @@
+#[macro_use]
+extern crate lazy_static;
+extern crate mongodb;
+
+use std::sync::Arc;
+
+use mongodb::Client;
+
+
+lazy_static! {
+    static ref LIV_DB_VEC: Arc<Vec<Client>> = Arc::new(vec![]);
+}
+
+pub struct DbConfig {
+    pub _type: String,
+}
+
+async fn init_db_str(mut str: String) {
+    // "mongodb://127.0.0.1"
+    str = String::from("mongodb://127.0.0.1");
+    let client = Client::with_uri_str(str.as_str()).await.expect("msg");
+    // (*LIV_DB_VEC).push(client);
+}
+
+pub trait DbCreate {
+}
+
 
 pub trait HelloLiv {
     fn hello_liv();
